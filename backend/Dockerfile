@@ -1,23 +1,23 @@
-# Utilise une image de base Node.js avec une version appropriée
-FROM node:18-alpine
+# Utiliser une image Node.js
+FROM node:18
 
-# Définit le répertoire de travail dans le conteneur
+# Définir le répertoire de travail
 WORKDIR /usr/src/app
 
-# Copie les fichiers de dépendances dans le conteneur
+# Copier les fichiers package.json et package-lock.json
 COPY package*.json ./
 
-# Installe les dépendances du projet
+# Installer les dépendances
 RUN npm install
 
-# Copie tout le reste du projet dans le conteneur
+# Copier le reste des fichiers
 COPY . .
 
-# Compile les fichiers TypeScript
+# Compiler TypeScript en JavaScript
 RUN npm run build
 
-# Expose le port sur lequel l'application écoute
+# Exposer le port
 EXPOSE 3000
 
-# Démarre l'application (en utilisant le fichier compilé dans dist)
-CMD ["node", "dist/app.js"]
+# Lancer l'application
+CMD ["npm", "start"]

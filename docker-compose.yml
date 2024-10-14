@@ -1,22 +1,17 @@
-version: '3'
+version: '3.8'
+
 services:
   backend:
     build:
       context: ./backend
-    ports:
-      - '3000:3000'
     volumes:
       - ./backend:/usr/src/app
-    networks:
-      - app-network
-
-  frontend:
-    build:
-      context: ./frontend
     ports:
-      - '8080:80'
-    networks:
-      - app-network
-networks:
-  app-network:
-    driver: bridge
+      - '3000:3000'
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
