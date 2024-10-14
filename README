@@ -20,7 +20,7 @@ Ce projet vise à développer une application web full-stack en utilisant Docker
  :
    ```bash
    git clone https://github.com/vhernandezge1/DockerTest.git
-   cd DockerTest
+   cd backend
 
    docker-compose up --build
 
