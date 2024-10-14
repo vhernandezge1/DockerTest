@@ -1,35 +1,22 @@
 version: '3'
 services:
   backend:
-    build: .
+    build:
+      context: ./backend
     ports:
       - '3000:3000'
     volumes:
-      - .:/usr/src/app
-    depends_on:
-      - db
-    networks:
-      - app-network
-  db:
-    image: mongo
-    ports:
-      - '27017:27017'
-    volumes:
-      - db-data:/data/db
-    networks:
-      - app-network
-  frontend:
-    build: ./frontend  # Assuming your frontend is in a folder called "frontend"
-    ports:
-      - '8080:80'
-    environment:
-      - REACT_APP_API_URL=http://backend:3000/api  # Pass the backend API URL to the frontend
+      - ./backend:/usr/src/app
     networks:
       - app-network
 
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - '8080:80'
+    networks:
+      - app-network
 networks:
   app-network:
     driver: bridge
-
-volumes:
-  db-data:

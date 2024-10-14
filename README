@@ -17,9 +17,14 @@ Ce projet vise à développer une application web full-stack en utilisant Docker
 - Docker et Docker Compose installés sur votre machine.
 - Git pour cloner le dépôt.
 
-## Installation
-
-1. **Cloner le dépôt** :
+ :
    ```bash
    git clone https://github.com/vhernandezge1/DockerTest.git
    cd DockerTest
+
+   docker-compose up --build
+
+   Accéder à l'application :
+
+Backend API : http://localhost:3000/api/users
+Frontend : http://localhost:8080

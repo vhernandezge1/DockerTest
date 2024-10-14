@@ -1,14 +1,23 @@
-# Étape 1 : Build
-FROM node:18-alpine AS build
+# Utilise une image de base Node.js avec une version appropriée
+FROM node:18-alpine
+
+# Définit le répertoire de travail dans le conteneur
 WORKDIR /usr/src/app
+
+# Copie les fichiers de dépendances dans le conteneur
 COPY package*.json ./
+
+# Installe les dépendances du projet
 RUN npm install
+
+# Copie tout le reste du projet dans le conteneur
 COPY . .
+
+# Compile les fichiers TypeScript
 RUN npm run build
 
-# Étape 2 : Exécution
-FROM node:18-alpine
-WORKDIR /usr/src/app
-COPY --from=build /usr/src/app ./
+# Expose le port sur lequel l'application écoute
 EXPOSE 3000
-CMD ["npm", "start"]
+
+# Démarre l'application (en utilisant le fichier compilé dans dist)
+CMD ["node", "dist/app.js"]
